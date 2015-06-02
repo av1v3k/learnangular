@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="my-app">
+    <head>
+        <title>An application to split up Email-address.</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="./css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div ng-controller="emailController">
+            <input type="text" id="email" ng-model="name"><!--declaring directive-->
+            <p>Hello <span ng-bind="name | uppercase"></span></p> <!-- using filters--> 
+            <label>Name:</label>{{nameType() | uppercase}} <!--Calling a function-->
+            
+            <ol>
+                <li ng-repeat="x in nameArray | orderBy:''">
+                    {{ x | uppercase}}
+                </li>
+            </ol>
+            <button ng-disabled="switchme">Button</button>
+            <div>
+                <label>Hide Table/Disable Button</label><input type="checkbox" ng-model="switchme" ng-click="count = count + 1">
+            </div><br>
+            <div>
+                Toggled <span>{{count}}</span> time(s).
+            </div>
+            <div>
+                <span id="showtext" ng-show="switchme"></span>
+                <table ng-show="!switchme">
+                    <thead>
+                        <th>Name of the Park</th>
+                        <th>Area Covered(in sq.ft)</th>
+                    </thead>
+                    <tr ng-repeat="x in tableValues">
+                            <td ng-if="$odd" >{{ x.name }}</td>
+                            <td ng-if="$odd" >{{ x.area }}</td>
+                            <td ng-if="$even" style="background-color: tomato;">{{ x.name }}</td>
+                            <td ng-if="$even" style="background-color: tomato;">{{ x.area }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script src="./js/angular-1.3.15.min.js"></script>
+        <script src="./js/script.js"></script>
+    </body>
+</html>
